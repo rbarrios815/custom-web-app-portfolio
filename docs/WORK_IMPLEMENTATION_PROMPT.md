@@ -1,4 +1,4 @@
-> **PUBLIC-SAFE HANDOFF:** This repository is currently PUBLIC. This is the approved implementation prompt with private Sheet identifiers, private source-repository URLs, and family identifiers redacted. A complete private source prompt remains at `rbarrios815/AI-PERSONAL-ASSISTANT/work-handoffs/ricardos-custom-web-app-portfolio.md` until the new repo is made private and the full copy is verified. Do not commit live customer information, private spreadsheet identifiers or secrets to a public repository.
+> **CANONICAL PUBLIC-SAFE HANDOFF:** This is the dedicated and public project repository. Use this prompt as the current project specification. Full original source links remain in the private legacy handoff while demo sources are verified/sanitized. Public visibility is intentional; only data and credentials need protecting.
 
 # BUILD & DEPLOY — RICARDO'S CUSTOM WEB APP PORTFOLIO
 
@@ -17,6 +17,19 @@ The website will advertise my custom web app development services by displaying 
 The homepage itself MUST be a Google Apps Script web app with its own dedicated Google Sheets database and preferably its own GitHub repository.
 
 Do not stop after researching, planning, or generating code. Build, test, deploy, and verify everything possible.
+
+## PUBLIC DEMO DATA DECISION — APPROVED
+
+Ricky confirmed on October 30, 2026 that **all four source Sheets presented through the public demos will contain no real identifying information**. Keep this GitHub repository PUBLIC. There is **no requirement to make the repository private**. Make the demos genuinely usable with clearly fictional names, RSVP submissions, events, contact details, and addresses.
+
+**Data-protection gate before publishing:**
+1. Inspect each original source Sheet and deployed web app to determine whether it currently contains real responses. Never delete or overwrite real submissions without a separate explicit instruction.
+2. If an original Sheet has real information or the demo shares a live production database, **create a separate sanitized demo-only copy**, populate it with synthetic example data, and configure a separate or safely isolated demo deployment to use it. Do not modify production data or deployment URLs in place.
+3. If a Sheet is already exclusively synthetic, it may serve directly as a demo source after verification; no unnecessary duplicate required.
+4. Review frontend, Sheets backend, logs, screenshot frames, sample forms, metadata, and visible UI text for names, emails, phone numbers, addresses, private notes, and other identifiers. Public screenshots must come from actual rendered demo pages, not mockups.
+5. Verify no public demo write can change the real original Sheet. Restrict access to admin operations and use bounded or resettable sample data for public submissions.
+6. Keep the existing **portfolio configuration spreadsheet** as the backing source of truth for the gallery; the four separate demo source Sheets are distinct from this portfolio config Sheet.
+7. Store public-safe project requirements and synthetic demo assets here. Look up any original private source links through the connected GitHub/Google Drive accounts; do not publish private customer data just to make them discoverable.
 
 ## 1. EXISTING PORTFOLIO DATABASE
 
@@ -194,9 +207,9 @@ Do not make the portfolio's private source spreadsheet publicly editable.
 
 ## 6. GITHUB & APPS SCRIPT
 
-Create a dedicated GitHub repository, preferably:
+Use this existing dedicated GitHub repository:
 
-`rbarrios815/custom-web-app-portfolio`
+`rbarrios815/custom-web-app-portfolio` (PUBLIC, confirmed by user)
 
 Include:
 
@@ -213,7 +226,7 @@ Connect the new project to the existing portfolio spreadsheet.
 
 Deploy the homepage as a Google Apps Script web app using an appropriate public-access configuration that allows prospective customers to view the portfolio without signing into my Google account.
 
-Do not modify or redeploy my existing Christmas, Thanksgiving, Baby Decker, or Baby Rafael apps unnecessarily.
+Preserve all original apps, databases, and production deployment URLs. Create or update isolated sanitized demo copies when the originals contain real data, without overwriting the originals.
 
 ## 7. TESTING & VERIFICATION
 
