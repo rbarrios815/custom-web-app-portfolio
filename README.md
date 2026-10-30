@@ -4,7 +4,7 @@ Professional Google Apps Script portfolio and interactive demo gallery — an in
 
 ## Status
 
-**Planning / Work handoff.** The website and screenshot gallery are not yet deployed. Repository visibility is currently **PUBLIC**. Do **not** commit private customer details, source-sheet IDs, keys, credentials, or private screenshots.
+**Planning / Work handoff.** The website and screenshot gallery are not yet deployed. Repository visibility is intentionally **PUBLIC**. All four demos must use verified fictional / non-identifying datasets. Do not commit real customer details, keys, credentials, or private screenshots.
 
 ## Start here
 
@@ -16,8 +16,11 @@ Professional Google Apps Script portfolio and interactive demo gallery — an in
 
 A responsive 2×2 gallery of four fully clickable real app homepage screenshots (Christmas Demo, Thanksgiving Demo, Baby Decker, Baby Rafa Flores), sourced from four existing Google Apps Script web apps. Separate Google Sheet-backed configuration, public demo validation, Email Me and Text Me buttons, accessibility, desktop/mobile QA, and deployment verification.
 
-### Private source records
+### Approved public-demo data architecture
 
-The full original prompt and backing spreadsheet URLs temporarily remain in the private `rbarrios815/AI-PERSONAL-ASSISTANT` repository while this new repository is public. Once this repository's visibility is changed to private, copy and verify the unredacted Work instructions here, delete the redundant full text from the assistant repository, and reduce that repository to one pointer.
-
-**Do not confuse the public-safe handoff with a verified migration of the unredacted prompt.**
+- **Keep this repository public.** Ricky approved public visibility.
+- The four displayed apps — Christmas Demo, Thanksgiving Demo, Baby Decker, and Baby Rafa Flores — must each use a verified non-identifying demo-only Sheet (or an already-synthetic Sheet).
+- **Preserve originals:** if an existing source Sheet holds real records, create and connect a sanitized demo copy instead of wiping or overwriting it.
+- The separate portfolio configuration Sheet remains the gallery's source of truth.
+- The detailed [Work implementation prompt](docs/WORK_IMPLEMENTATION_PROMPT.md) and [issue #1](https://github.com/rbarrios815/custom-web-app-portfolio/issues/1) are canonical.
+- The original private handoff remains archived for source discovery until the public demo links and datasets have been checked; it is not a requirement to privatize this repository.
