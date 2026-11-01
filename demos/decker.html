@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --background: #f4f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #dbe2ea;
+      --success: #166534;
+      --success-background: #dcfce7;
+      --error: #991b1b;
+      --error-background: #fee2e2;
+      --highlight: #eff6ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    }
+
+    .page {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      padding: 20px 14px 50px;
+    }
+
+    .hero {
+      padding: 26px 20px;
+      margin-bottom: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 7vw, 42px);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 6px;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      font: inherit;
+      font-size: 16px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 95px;
+    }
+
+    button {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--primary);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    button:disabled {
+      opacity: .6;
+    }
+
+    .required {
+      color: #dc2626;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .success {
+      display: block;
+      background: var(--success-background);
+      color: var(--success);
+    }
+
+    .error {
+      display: block;
+      background: var(--error-background);
+      color: var(--error);
+    }
+
+    .preference-box {
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--highlight);
+      border: 1px solid #bfdbfe;
+      line-height: 1.5;
+    }
+
+    .preference-box h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .restaurant {
+      margin-bottom: 14px;
+    }
+
+    .restaurant:last-child {
+      margin-bottom: 0;
+    }
+
+    .restaurant strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .schedule-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .entry {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+      background: #fbfdff;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .badge {
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .entry p {
+      margin: 7px 0 0;
+      line-height: 1.4;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (min-width: 700px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      button[type="submit"] {
+        width: auto;
+        min-width: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body><div style="padding:10px 18px;background:#fff3ce;color:#49330c;font:600 14px/1.5 system-ui;text-align:center" role="note">Interactive portfolio demo · Fictional sample data only. Please do not enter personal information.</div>
+
+  <main class="page">
+
+    <section class="hero">
+      <h1>Decker Family Meal Sign-Up</h1>
+      <p>
+        Sign up to get the Deckers a meal, delivery, or gift card.
+      </p>
+    </section>
+
+    <section class="card">
+
+      <h2>Sign up to help</h2>
+
+      <p class="subtitle">
+        Choose what you'd like to provide.
+      </p>
+
+      <form id="mealForm">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>
+              Your name
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label>
+              Date
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="date"
+              type="date"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label>
+              Type
+              <span class="required">*</span>
+            </label>
+
+            <select
+              id="mealType"
+              required
+            >
+              <option value="">Choose one</option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Snack">Snack</option>
+              <option value="Dessert">Dessert</option>
+              <option value="DoorDash">DoorDash</option>
+              <option value="Gift Card">Gift Card</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>
+              Approximate delivery time
+            </label>
+
+            <input
+              id="deliveryTime"
+              type="time"
+            >
+          </div>
+
+          <div class="preference-box full-width">
+
+            <h3>Favorite restaurants & orders</h3>
+
+            <div class="restaurant">
+              <strong>L & A China Cafe — Fictional example</strong>
+              Beef & broccoli and fried rice.
+              The boys like plain chicken from the kids menu
+              with sauce on the side.
+            </div>
+
+            <div class="restaurant">
+              <strong>Pepperoni’s Pizza — Fictional example</strong>
+              The boys like plain cheese pizza and pepperoni rolls.
+              The fictional sample parents like the Italian Texano pizza.
+            </div>
+
+            <div class="restaurant">
+              <strong>Chick-fil-A</strong>
+              The boys like chicken nuggets and mac & cheese.
+            </div>
+
+          </div>
+
+          <div class="preference-box full-width">
+
+            <h3>Gift card ideas</h3>
+
+            <p>
+              DoorDash, Chick-fil-A, Pepperoni’s Pizza,
+              or another restaurant gift card would all be helpful.
+            </p>
+
+            <div class="field">
+              <label>
+                Gift card amount
+                <span class="muted">(optional)</span>
+              </label>
+
+              <input
+                id="giftCardAmount"
+                type="text"
+                placeholder="$25, $50, etc."
+              >
+            </div>
+
+          </div>
+
+          <div class="field full-width">
+
+            <label>
+              What are you bringing?
+            </label>
+
+            <input
+              id="food"
+              type="text"
+              placeholder="Meal, restaurant order, gift card type, etc."
+            >
+
+          </div>
+
+          <div class="field full-width">
+            <label>
+              Sample note (public)
+            </label>
+
+            <textarea
+              id="notes"
+              placeholder="Use fictional notes only. Do not enter contact details."
+            ></textarea>
+          </div>
+
+        </div>
+
+        <button
+          id="submitButton"
+          type="submit"
+        >
+          Add My Sign-Up
+        </button>
+
+        <div
+          id="formMessage"
+          class="message"
+        ></div>
+
+      </form>
+
+    </section>
+
+    <section class="card">
+
+      <h2>Current sign-ups</h2>
+
+      <div id="schedule">
+        Loading...
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    const mealType =
+      document.getElementById('mealType');
+
+    const food =
+      document.getElementById('food');
+
+    const form =
+      document.getElementById('mealForm');
+
+    const message =
+      document.getElementById('formMessage');
+
+    const submitButton =
+      document.getElementById('submitButton');
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      loadSchedule
+    );
+
+    form.addEventListener('submit', event => {
+
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Adding...';
+
+      const data = {
+
+        name:
+          document.getElementById('name').value,
+
+        date:
+          document.getElementById('date').value,
+
+        mealType:
+          mealType.value,
+
+        food:
+          food.value,
+
+        deliveryTime:
+          formatTime(
+            document.getElementById('deliveryTime').value
+          ),
+
+        notes:
+          document.getElementById('notes').value,
+
+        giftCardAmount:
+          document.getElementById('giftCardAmount').value
+
+      };
+
+      google.script.run
+
+        .withSuccessHandler(result => {
+
+          message.textContent = result.message;
+          message.className = 'message success';
+
+          form.reset();
+          loadSchedule();
+
+          submitButton.disabled = false;
+          submitButton.textContent = 'Add My Sign-Up';
+
+        })
+
+        .withFailureHandler(error => {
+
+          message.textContent =
+            error.message || 'Something went wrong.';
+
+          message.className = 'message error';
+
+          submitButton.disabled = false;
+          submitButton.textContent = 'Add My Sign-Up';
+
+        })
+
+        .submitMealSignUp(data);
+
+    });
+
+    function loadSchedule() {
+
+      google.script.run
+
+        .withSuccessHandler(entries => {
+
+          const schedule =
+            document.getElementById('schedule');
+
+          if (!entries.length) {
+
+            schedule.innerHTML =
+              '<p class="muted">No one has signed up yet.</p>';
+
+            return;
+          }
+
+          schedule.innerHTML =
+            '<div class="schedule-list">' +
+
+            entries.map(entry => {
+
+              const giftCardLine =
+                entry.giftCardAmount
+                ? `<p><strong>Gift card:</strong> ${escapeHtml(entry.giftCardAmount)}</p>`
+                : '';
+
+              const foodLine =
+                entry.food
+                ? `<p><strong>Bringing:</strong> ${escapeHtml(entry.food)}</p>`
+                : '';
+
+              const timeLine =
+                entry.deliveryTime
+                ? `<p><strong>Time:</strong> ${escapeHtml(entry.deliveryTime)}</p>`
+                : '';
+
+              const notesLine =
+                entry.notes
+                ? `<p class="muted">${escapeHtml(entry.notes)}</p>`
+                : '';
+
+              return `
+
+                <div class="entry">
+
+                  <div class="entry-header">
+
+                    <div>
+                      <strong>
+                        ${escapeHtml(entry.name)}
+                      </strong>
+
+                      <div class="muted">
+                        ${escapeHtml(entry.date)}
+                      </div>
+                    </div>
+
+                    <span class="badge">
+                      ${escapeHtml(entry.mealType)}
+                    </span>
+
+                  </div>
+
+                  ${foodLine}
+                  ${giftCardLine}
+                  ${timeLine}
+                  ${notesLine}
+
+                </div>
+
+              `;
+
+            }).join('') +
+
+            '</div>';
+
+        })
+
+        .getMealSignUps();
+
+    }
+
+    function formatTime(time) {
+
+      if (!time) return '';
+
+      const [hours, minutes] =
+        time.split(':');
+
+      let hour = Number(hours);
+
+      const suffix =
+        hour >= 12 ? 'PM' : 'AM';
+
+      hour =
+        hour % 12 || 12;
+
+      return `${hour}:${minutes} ${suffix}`;
+    }
+
+    function escapeHtml(value) {
+
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+
+    }
+
+  </script>
+
+</body>
+</html>

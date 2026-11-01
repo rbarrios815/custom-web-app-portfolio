@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ricardo’s Custom Web App Portfolio</title>
+  <style>
+    :root{color-scheme:light;--ink:#183b37;--muted:#53655f;--paper:#f7f7f1;--line:#d9dfd5;--accent:#d9edba}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid #986119;outline-offset:6px}.skip{position:absolute;left:16px;top:-80px;background:white;padding:12px;z-index:5}.skip:focus{top:12px}
+    .wrap{width:min(1120px,100% - 64px);margin:auto}.brand{padding:30px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;font-size:13px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}.monogram{display:grid;place-items:center;background:var(--ink);color:var(--paper);width:38px;height:38px;border-radius:50%;letter-spacing:-1px;font-size:14px}.hero{padding:72px 0 48px;max-width:900px}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:750;color:var(--muted);margin:0 0 17px}h1{font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-.045em;font-weight:600;margin:0 0 24px;max-width:880px}.hero p:last-child{font-size:19px;max-width:640px;color:var(--muted);margin:0}.section-heading{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:20px;margin:0 0 28px}.section-heading h2{font-size:18px;margin:0;font-weight:600}.section-heading span{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 32px}.card{display:block;min-width:0;border:1px solid var(--line);background:#fff;border-radius:18px;overflow:hidden;text-decoration:none;box-shadow:0 5px 20px #183b3705;transition:transform .2s,box-shadow .2s,border-color .2s}.card[href]:hover{transform:translateY(-5px);box-shadow:0 14px 35px #183b3710;border-color:#8caa94}.card[href]:active{transform:translateY(-1px)}.shot{aspect-ratio:16/10;overflow:hidden;background:#eef0e8;display:grid;place-items:center;position:relative;border-bottom:1px solid var(--line)}.shot img{display:block;width:100%;height:100%;object-fit:contain;object-position:top}.missing{display:grid;place-items:center;gap:10px;padding:28px;text-align:center;color:var(--muted);font-size:14px}.missing .number{font:italic 44px/1.2 Georgia,serif;color:#829789}.card-body{padding:25px 28px 28px}.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}.card h3{margin:0;font-size:23px;letter-spacing:-.025em;font-weight:600}.index{font-size:12px;color:var(--muted)}.description{margin:10px 0 24px;color:var(--muted);min-height:52px;font-size:15px}.cta{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700}.arrow{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);font-size:20px}.pending{color:var(--muted);font-weight:500}.contact{margin:72px 0 48px;padding:40px;background:var(--ink);border-radius:18px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:32px}.contact h2{font-size:28px;line-height:1.2;letter-spacing:-.025em;margin:0 0 10px}.contact p{margin:0;color:#d4e1d9;max-width:580px}.contact-links{display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0}.contact-links a{padding:13px 20px;border-radius:999px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;min-height:48px}.contact-links a+ a{background:transparent;color:#fff;border:1px solid #8da89d}footer{padding:26px 0 36px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:16px}#message{padding:30px 0;color:var(--muted)}[hidden]{display:none!important}
+    @media(max-width:700px){.wrap{width:calc(100% - 36px)}.brand{padding:20px 0}.hero{padding:46px 0 36px}.hero p:last-child{font-size:17px}.grid{grid-template-columns:1fr;gap:24px}.section-heading span{font-size:10px}.card-body{padding:22px}.description{min-height:0}.contact{margin:42px 0 32px;padding:28px;display:block}.contact-links{margin-top:24px}footer{display:block}footer span{display:block;margin-top:8px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}.card[href]:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#gallery">Skip to demos</a>
+  <div class="wrap">
+    <header class="brand"><span class="monogram" aria-hidden="true">RB</span> Ricardo Barrios <span aria-hidden="true">/</span> Custom Web Apps</header>
+    <main>
+      <section class="hero"><p id="subtitle" class="eyebrow">Interactive Demo Gallery</p><h1 id="title">Ricardo’s Custom Web App Portfolio</h1><p id="intro">Explore interactive web apps built for real people, events, and businesses.</p></section>
+      <section id="gallery" aria-labelledby="gallery-title"><div class="section-heading"><h2 id="gallery-title">Explore the demos</h2><span>Events · Family · Community</span></div><p id="message" role="status">Loading the gallery…</p><div id="cards" class="grid"></div></section>
+      <section id="contact" class="contact" hidden><div><h2>Want Your Own Custom Web App?</h2><p id="contact-intro"></p></div><div id="contact-links" class="contact-links"></div></section>
+    </main>
+    <footer><span>© 2026 Ricardo Barrios. Custom Web App Development.</span><span>Built around real life.</span></footer>
+  </div>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    function el(tag, cls, text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
+    function https(s){try{const u=new URL(s);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch(_){return '';}}
+    function render(model){
+      $('title').textContent=model.title; $('subtitle').textContent=model.subtitle; $('intro').textContent=model.intro;
+      $('cards').replaceChildren();
+      model.cards.forEach((c,i)=>{
+        const url=c.ready?https(c.url):'',image=c.ready?https(c.image):'';
+        const card=el(url&&image?'a':'article','card');
+        if(url&&image){card.href=url;card.target='_blank';card.rel='noopener noreferrer';card.setAttribute('aria-label',c.title+' — view live demo (opens in new tab)');}
+        const shot=el('div','shot');
+        function missing(){shot.replaceChildren();const m=el('div','missing');m.append(el('span','number',String(i+1).padStart(2,'0')),el('span','',image?'Screenshot unavailable':'Homepage screenshot coming soon'));shot.append(m);}
+        if(image){const img=el('img');img.src=image;img.alt=c.title+' homepage';img.loading=i<2?'eager':'lazy';img.referrerPolicy='no-referrer';img.addEventListener('error',missing,{once:true});shot.append(img);}else missing();
+        const body=el('div','card-body'),head=el('div','card-head');head.append(el('h3','',c.title),el('span','index',String(i+1).padStart(2,'0')));body.append(head,el('p','description',c.description));
+        const cta=el('div','cta'+(url&&image?'':' pending'));cta.append(el('span','',url&&image?'View Live Demo':'Demo being prepared'));if(url&&image){const arrow=el('span','arrow','↗');arrow.setAttribute('aria-hidden','true');cta.append(arrow);}body.append(cta);card.append(shot,body);$('cards').append(card);
+      });
+      $('message').hidden=model.cards.length>0;if(!model.cards.length)$('message').textContent='New demos are on the way. Please check back soon.';
+      const links=$('contact-links');links.replaceChildren();
+      if(model.email&&/^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(model.email)){const a=el('a','','✉ Email Me');a.href='mailto:'+encodeURIComponent(model.email);links.append(a);}
+      if(model.phone&&/^\+?\d{7,15}$/.test(model.phone)){const a=el('a','','Text Me');a.href='sms:'+model.phone;links.append(a);}
+      $('contact-intro').textContent=model.contactIntro;$('contact').hidden=!links.children.length;
+    }
+    function failure(){ $('message').hidden=false;$('message').textContent='The gallery couldn’t load. Please refresh to try again.'; }
+    if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(render).withFailureHandler(failure).getPortfolio();}else failure();
+  </script>
+</body>
+</html>
