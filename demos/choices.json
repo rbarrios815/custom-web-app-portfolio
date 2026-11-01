@@ -1,0 +1,43 @@
+{
+  "names": [
+    "Alex Example",
+    "Morgan Sample",
+    "Taylor Demo",
+    "Casey Placeholder",
+    "Holly Snow",
+    "Noel Snow",
+    "Nick Frost",
+    "Jolly Evergreen",
+    "Holly Maple",
+    "Oliver Acorn",
+    "Autumn Fields"
+  ],
+  "notes": [
+    "",
+    "Fictional sample signup",
+    "Enjoy the sample meal!",
+    "Demo delivery only."
+  ],
+  "items": [
+    "Vegetable lasagna",
+    "Soup and salad",
+    "Fruit basket",
+    "Sample pizza",
+    "Sample gift card",
+    "Sample baby blanket"
+  ],
+  "times": [
+    "",
+    "09:00",
+    "12:00",
+    "15:00",
+    "17:30",
+    "18:00"
+  ],
+  "amounts": [
+    "",
+    "25",
+    "50",
+    "100"
+  ]
+}

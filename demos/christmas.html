@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123f2f">
+  <title>CHRISTMAS DEMO</title>
+  <style>
+    :root {
+      --evergreen-950: #08261d;
+      --evergreen-900: #0b3427;
+      --evergreen-800: #124b39;
+      --evergreen-700: #176247;
+      --berry-800: #8f1d2c;
+      --berry-700: #b3263b;
+      --berry-600: #cf334a;
+      --gold-500: #d9a441;
+      --gold-300: #f1d58a;
+      --cream-50: #fffdf7;
+      --cream-100: #fbf6e9;
+      --ink: #17332b;
+      --muted: #5e6f69;
+      --line: rgba(18, 75, 57, .16);
+      --shadow: 0 18px 48px rgba(3, 24, 17, .18);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      color-scheme: light;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font: 16px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(207, 51, 74, .26), transparent 30rem),
+        radial-gradient(circle at 88% 8%, rgba(217, 164, 65, .20), transparent 26rem),
+        linear-gradient(145deg, var(--evergreen-950), var(--evergreen-800) 58%, #0a2f27);
+      padding: 22px 22px 48px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.55) 0 1px, transparent 1.5px);
+      background-position: 0 0, 18px 22px;
+      background-size: 42px 42px, 56px 56px;
+      z-index: -1;
+    }
+
+    button, input, select { font: inherit; }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app-shell {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+    }
+
+    .light-string {
+      height: 30px;
+      margin: -8px 6px 10px;
+      border-top: 3px solid rgba(22, 48, 39, .9);
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 4% 8px, #f5cc56 0 5px, transparent 6px),
+        radial-gradient(circle at 13% 10px, #d94758 0 5px, transparent 6px),
+        radial-gradient(circle at 22% 6px, #6ac6a4 0 5px, transparent 6px),
+        radial-gradient(circle at 31% 11px, #f5cc56 0 5px, transparent 6px),
+        radial-gradient(circle at 40% 7px, #d94758 0 5px, transparent 6px),
+        radial-gradient(circle at 49% 11px, #6ac6a4 0 5px, transparent 6px),
+        radial-gradient(circle at 58% 7px, #f5cc56 0 5px, transparent 6px),
+        radial-gradient(circle at 67% 11px, #d94758 0 5px, transparent 6px),
+        radial-gradient(circle at 76% 7px, #6ac6a4 0 5px, transparent 6px),
+        radial-gradient(circle at 85% 10px, #f5cc56 0 5px, transparent 6px),
+        radial-gradient(circle at 94% 7px, #d94758 0 5px, transparent 6px);
+      filter: drop-shadow(0 0 8px rgba(245, 204, 86, .55));
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      min-height: 154px;
+      padding: 24px 28px;
+      color: white;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(118deg, rgba(143, 29, 44, .98), rgba(179, 38, 59, .92) 44%, rgba(18, 75, 57, .95));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "❄";
+      position: absolute;
+      right: 22%;
+      top: -62px;
+      font: 220px/1 Georgia, serif;
+      color: rgba(255,255,255,.08);
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 4px;
+      color: var(--gold-300);
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font: 800 clamp(2rem, 4vw, 3.55rem)/.96 Georgia, "Times New Roman", serif;
+      letter-spacing: -.035em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      margin: 9px 0 0;
+      color: rgba(255,255,255,.88);
+      font-size: 1rem;
+    }
+
+    .wreath {
+      width: 106px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 14px dotted #4f9c72;
+      border-radius: 50%;
+      background: rgba(7, 39, 28, .45);
+      box-shadow: inset 0 0 0 8px rgba(255,255,255,.08), 0 10px 28px rgba(0,0,0,.22);
+      font-size: 2.5rem;
+      transform: rotate(-3deg);
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      gap: 6px;
+      padding: 6px 11px;
+      color: #fff;
+      font-weight: 750;
+      font-size: .88rem;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      background: rgba(7, 39, 28, .38);
+      backdrop-filter: blur(8px);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.28fr) minmax(320px, .72fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,.52);
+      background:
+        linear-gradient(var(--cream-50), var(--cream-50)) padding-box,
+        repeating-linear-gradient(135deg, var(--berry-600) 0 9px, var(--cream-50) 9px 18px, var(--evergreen-700) 18px 27px, var(--cream-50) 27px 36px) border-box;
+      box-shadow: var(--shadow);
+    }
+
+    .card-inner {
+      padding: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      margin: 0 0 3px;
+      color: var(--berry-700);
+      font-weight: 850;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h2, h3, p { margin-top: 0; }
+
+    h2 {
+      margin-bottom: 0;
+      font: 800 clamp(1.45rem, 2.5vw, 2.05rem)/1.08 Georgia, "Times New Roman", serif;
+      color: var(--evergreen-900);
+    }
+
+    h3 {
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: var(--evergreen-900);
+    }
+
+    .helper {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .step-badge {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: white;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--berry-700), var(--berry-600));
+      box-shadow: 0 7px 18px rgba(143, 29, 44, .25);
+      font-weight: 900;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    label, legend {
+      color: var(--evergreen-900);
+      font-weight: 800;
+    }
+
+    .required {
+      color: var(--berry-700);
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      min-height: 54px;
+      padding: 13px 15px;
+      color: var(--ink);
+      font-size: 16px;
+      border: 2px solid rgba(18, 75, 57, .22);
+      border-radius: var(--radius-md);
+      background: white;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.03);
+      transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--berry-600);
+      box-shadow: 0 0 0 4px rgba(207, 51, 74, .13);
+    }
+
+    input[aria-invalid="true"] {
+      border-color: #b42318;
+      box-shadow: 0 0 0 4px rgba(180, 35, 24, .12);
+    }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform .13s ease, box-shadow .13s ease, opacity .13s ease;
+    }
+
+    .button:hover:not(:disabled) { transform: translateY(-1px); }
+    .button:active:not(:disabled) { transform: translateY(0); }
+
+    .button:focus-visible,
+    .nav-button:focus-visible,
+    .icon-button:focus-visible,
+    .choice-card:focus-within {
+      outline: 3px solid var(--gold-500);
+      outline-offset: 2px;
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(110deg, var(--berry-700), var(--berry-600));
+      box-shadow: 0 9px 20px rgba(143, 29, 44, .24);
+    }
+
+    .button-secondary {
+      color: white;
+      background: linear-gradient(110deg, var(--evergreen-800), var(--evergreen-700));
+      box-shadow: 0 9px 20px rgba(18, 75, 57, .20);
+    }
+
+    .button-ghost {
+      color: var(--evergreen-900);
+      background: rgba(18, 75, 57, .08);
+      border: 1px solid rgba(18, 75, 57, .18);
+      box-shadow: none;
+    }
+
+    .button:disabled {
+      opacity: .55;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .action-tile {
+      min-height: 86px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 4px;
+      padding: 12px 10px;
+      text-align: center;
+      color: var(--evergreen-900);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, white, #f7f2e4);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .action-tile span:first-child { font-size: 1.45rem; }
+    .action-tile small { color: var(--muted); font-weight: 650; }
+
+    .success-panel {
+      display: none;
+      gap: 14px;
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid rgba(23, 98, 71, .22);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(120deg, rgba(23, 98, 71, .09), rgba(217, 164, 65, .12));
+    }
+
+    .success-panel.visible { display: grid; }
+
+    .success-heading {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 900;
+      color: var(--evergreen-900);
+    }
+
+    .my-party {
+      display: grid;
+      gap: 8px;
+    }
+
+    .party-row,
+    .preview-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.8);
+    }
+
+    .party-person,
+    .preview-main {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+    }
+
+    .party-meta,
+    .preview-meta {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: .82rem;
+      text-align: right;
+    }
+
+    .side-card .card-inner { padding: 20px; }
+
+    .side-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .count-orb {
+      display: grid;
+      place-items: center;
+      min-width: 52px;
+      height: 40px;
+      padding: 0 12px;
+      color: white;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--berry-700), var(--gold-500));
+      font-weight: 900;
+    }
+
+    .preview-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .empty-state {
+      padding: 16px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px dashed rgba(18, 75, 57, .22);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.45);
+    }
+
+    .status {
+      min-height: 0;
+      margin-top: 12px;
+      border-radius: 12px;
+      font-size: .93rem;
+      font-weight: 750;
+    }
+
+    .status:not(:empty) {
+      padding: 10px 12px;
+      border: 1px solid rgba(18, 75, 57, .18);
+      background: rgba(18, 75, 57, .08);
+    }
+
+    .status.error {
+      color: #8a1711;
+      border-color: rgba(180, 35, 24, .24);
+      background: rgba(180, 35, 24, .08);
+    }
+
+    .status.success {
+      color: #0f5d3f;
+      border-color: rgba(23, 98, 71, .24);
+      background: rgba(23, 98, 71, .09);
+    }
+
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: white;
+      background: rgba(8, 38, 29, .88);
+      backdrop-filter: blur(8px);
+      transition: opacity .2s ease, visibility .2s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loading-box {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 58px;
+      aspect-ratio: 1;
+      border: 6px solid rgba(255,255,255,.25);
+      border-top-color: var(--gold-300);
+      border-radius: 50%;
+      animation: spin .75s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    dialog {
+      width: min(720px, calc(100vw - 28px));
+      max-height: min(86vh, 820px);
+      padding: 0;
+      color: var(--ink);
+      border: 0;
+      border-radius: 24px;
+      background: var(--cream-50);
+      box-shadow: 0 28px 90px rgba(0,0,0,.42);
+      overflow: hidden;
+    }
+
+    dialog::backdrop {
+      background: rgba(4, 27, 20, .72);
+      backdrop-filter: blur(4px);
+    }
+
+    .dialog-shell {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      max-height: min(86vh, 820px);
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 17px 18px;
+      color: white;
+      background: linear-gradient(110deg, var(--evergreen-900), var(--evergreen-700));
+    }
+
+    .dialog-header h2 {
+      color: white;
+      font-size: 1.45rem;
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .dialog-body {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 18px;
+    }
+
+    .dialog-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      padding: 13px 18px calc(13px + var(--safe-bottom));
+      border-top: 1px solid var(--line);
+      background: #fffaf0;
+    }
+
+    fieldset {
+      min-width: 0;
+      padding: 0;
+      margin: 16px 0 0;
+      border: 0;
+    }
+
+    .radio-grid,
+    .choice-grid {
+      display: grid;
+      gap: 9px;
+      margin-top: 9px;
+    }
+
+    .radio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .choice-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      min-height: 52px;
+      padding: 11px 12px;
+      border: 1px solid rgba(18, 75, 57, .18);
+      border-radius: 13px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .choice-card:has(input:checked) {
+      border-color: var(--berry-600);
+      background: rgba(207, 51, 74, .07);
+      box-shadow: inset 0 0 0 1px var(--berry-600);
+    }
+
+    .choice-card.disabled {
+      opacity: .58;
+      cursor: not-allowed;
+      background: #f1eee7;
+    }
+
+    .choice-card input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--berry-700);
+    }
+
+    .choice-title { font-weight: 820; }
+    .choice-help { display: block; color: var(--muted); font-size: .8rem; margin-top: 1px; }
+
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .group-card {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: white;
+    }
+
+    .group-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 9px;
+      font-weight: 900;
+      color: var(--evergreen-900);
+    }
+
+    .group-members {
+      display: grid;
+      gap: 6px;
+    }
+
+    .group-member {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+      font-size: .9rem;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-item {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .detail-icon { font-size: 1.35rem; }
+
+    .mobile-nav {
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(20px + var(--safe-bottom));
+      z-index: 120;
+      width: min(440px, calc(100vw - 28px));
+      padding: 12px 15px;
+      color: white;
+      text-align: center;
+      border-radius: 999px;
+      background: rgba(8, 38, 29, .95);
+      box-shadow: 0 16px 38px rgba(0,0,0,.32);
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      font-weight: 800;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+
+
+    /* MAX-CHRISTMAS-PASS-2026: intentionally bold holiday presentation */
+    body {
+      background:
+        radial-gradient(circle at 9% 8%, rgba(255, 55, 78, .30), transparent 25rem),
+        radial-gradient(circle at 92% 4%, rgba(255, 207, 92, .25), transparent 23rem),
+        radial-gradient(circle at 50% 105%, rgba(94, 190, 147, .22), transparent 34rem),
+        linear-gradient(150deg, #041c14 0%, var(--evergreen-950) 33%, #123f2f 67%, #071f18 100%);
+    }
+
+    body::before {
+      opacity: .62;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.72) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,.48) 0 2px, transparent 2.6px);
+      background-position: 0 0, 23px 31px, 51px 13px;
+      background-size: 54px 54px, 76px 76px, 108px 108px;
+      animation: snow-drift 20s linear infinite;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto 0 0;
+      height: 72px;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(80px 34px at 6% 100%, rgba(255,255,255,.22) 0 98%, transparent 100%),
+        radial-gradient(110px 42px at 25% 100%, rgba(255,255,255,.18) 0 98%, transparent 100%),
+        radial-gradient(96px 38px at 49% 100%, rgba(255,255,255,.20) 0 98%, transparent 100%),
+        radial-gradient(126px 46px at 75% 100%, rgba(255,255,255,.17) 0 98%, transparent 100%),
+        radial-gradient(86px 34px at 95% 100%, rgba(255,255,255,.22) 0 98%, transparent 100%);
+    }
+
+    @keyframes snow-drift {
+      to { background-position: 54px 108px, -53px 107px, 159px 121px; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { filter: drop-shadow(0 0 5px currentColor); transform: translateY(0) scale(.96); }
+      50% { filter: drop-shadow(0 0 13px currentColor); transform: translateY(2px) scale(1.08); }
+    }
+
+    @keyframes ornament-sway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+    }
+
+    @keyframes christmas-glow {
+      0%, 100% { box-shadow: 0 16px 46px rgba(0,0,0,.26), 0 0 0 rgba(241,213,138,0); }
+      50% { box-shadow: 0 18px 54px rgba(0,0,0,.30), 0 0 28px rgba(241,213,138,.22); }
+    }
+
+    .app-shell { position: relative; }
+
+    .north-pole-banner {
+      width: fit-content;
+      max-width: calc(100% - 24px);
+      margin: 0 auto 12px;
+      padding: 7px 20px 8px;
+      color: #fff9e8;
+      text-align: center;
+      font: 900 .78rem/1.1 Georgia, "Times New Roman", serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      border: 2px solid rgba(255,255,255,.72);
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(135deg, #b51f35 0 11px, #d93a50 11px 22px, #fff8e8 22px 27px, #176247 27px 38px, #0e4936 38px 49px, #fff8e8 49px 54px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.24), inset 0 0 0 2px rgba(8,38,29,.18);
+      text-shadow: 0 2px 5px rgba(0,0,0,.55);
+    }
+
+    .light-string {
+      height: 46px;
+      margin: -4px 6px 8px;
+      border-top: 0;
+      border-radius: 999px 999px 45% 45%;
+      background:
+        radial-gradient(ellipse at 50% 0, #2d7a55 0 28%, transparent 29%),
+        repeating-linear-gradient(165deg, transparent 0 16px, rgba(47,135,89,.98) 17px 24px, rgba(10,74,48,.95) 25px 33px, transparent 34px 47px);
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.28));
+      overflow: visible;
+    }
+
+    .light-string::before {
+      content: "";
+      position: absolute;
+      left: 2%;
+      right: 2%;
+      top: 7px;
+      height: 5px;
+      border-radius: 50%;
+      background: #163e2d;
+      box-shadow: 0 3px 0 rgba(255,255,255,.06);
+    }
+
+    .bulb {
+      position: absolute;
+      top: 13px;
+      width: 13px;
+      height: 18px;
+      border-radius: 50% 50% 45% 45%;
+      color: #f7d65e;
+      background: currentColor;
+      box-shadow: inset 0 2px 2px rgba(255,255,255,.62);
+      animation: twinkle 1.8s ease-in-out infinite;
+    }
+
+    .bulb::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: -5px;
+      width: 7px;
+      height: 6px;
+      border-radius: 2px;
+      background: #293c33;
+    }
+
+    .bulb:nth-child(1) { left: 6%; color: #ffd45c; animation-delay: -.4s; }
+    .bulb:nth-child(2) { left: 18%; color: #ef4560; animation-delay: -1.1s; }
+    .bulb:nth-child(3) { left: 31%; color: #8ae2ba; animation-delay: -.7s; }
+    .bulb:nth-child(4) { left: 44%; color: #ffd45c; animation-delay: -1.5s; }
+    .bulb:nth-child(5) { left: 57%; color: #ef4560; animation-delay: -.2s; }
+    .bulb:nth-child(6) { left: 70%; color: #8ae2ba; animation-delay: -1.3s; }
+    .bulb:nth-child(7) { left: 83%; color: #ffd45c; animation-delay: -.8s; }
+    .bulb:nth-child(8) { left: 94%; color: #ef4560; animation-delay: -1.7s; }
+
+    .hero {
+      min-height: 248px;
+      padding: 30px 34px;
+      border: 5px solid transparent;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255,232,158,.24), transparent 15rem) padding-box,
+        radial-gradient(circle at 21% 110%, rgba(255,255,255,.20), transparent 20rem) padding-box,
+        linear-gradient(122deg, #9c172b 0%, #c82740 39%, #155d43 72%, #0b3b2c 100%) padding-box,
+        repeating-linear-gradient(135deg, #d82d48 0 12px, #fff8e8 12px 24px, #176247 24px 36px, #fff8e8 36px 48px) border-box;
+      box-shadow: 0 24px 68px rgba(0,0,0,.34), inset 0 0 0 2px rgba(255,255,255,.16);
+      animation: christmas-glow 4.5s ease-in-out infinite;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      bottom: -47px;
+      height: 110px;
+      background:
+        radial-gradient(95px 45px at 8% 12%, rgba(255,255,255,.94) 0 98%, transparent 100%),
+        radial-gradient(130px 54px at 31% 6%, rgba(255,255,255,.91) 0 98%, transparent 100%),
+        radial-gradient(115px 50px at 56% 16%, rgba(255,255,255,.95) 0 98%, transparent 100%),
+        radial-gradient(148px 60px at 82% 5%, rgba(255,255,255,.90) 0 98%, transparent 100%);
+      opacity: .26;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "❄";
+      right: 33%;
+      top: -54px;
+      color: rgba(255,255,255,.11);
+      font-size: 250px;
+    }
+
+    .hero-copy-wrap { position: relative; z-index: 2; }
+
+    .hero-ornaments {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .hero-ornament {
+      position: absolute;
+      top: -8px;
+      width: 3px;
+      height: 36px;
+      background: rgba(255,240,185,.72);
+      transform-origin: top;
+      animation: ornament-sway 3.7s ease-in-out infinite;
+    }
+
+    .hero-ornament::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 31px;
+      width: 25px;
+      height: 25px;
+      border: 3px solid rgba(255,255,255,.52);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      background: #f2c954;
+      box-shadow: 0 0 16px rgba(255,221,99,.62), inset 0 3px 5px rgba(255,255,255,.48);
+    }
+
+    .hero-ornament:nth-child(1) { left: 17%; animation-delay: -.8s; }
+    .hero-ornament:nth-child(1)::after { background: #f2c954; }
+    .hero-ornament:nth-child(2) { left: 53%; height: 27px; animation-delay: -1.7s; }
+    .hero-ornament:nth-child(2)::after { top: 22px; background: #5ec59a; }
+    .hero-ornament:nth-child(3) { left: 72%; height: 43px; animation-delay: -.2s; }
+    .hero-ornament:nth-child(3)::after { top: 38px; background: #ef4560; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+      padding: 5px 11px;
+      color: #fff6cf;
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 999px;
+      background: rgba(6,45,31,.38);
+      text-shadow: 0 2px 5px rgba(0,0,0,.32);
+    }
+
+    .hero h1 {
+      display: grid;
+      gap: 2px;
+      max-width: 760px;
+      text-shadow: 0 4px 0 rgba(85,10,24,.30), 0 8px 22px rgba(0,0,0,.30);
+    }
+
+    .merry-title {
+      display: block;
+      color: #fffdf6;
+      font-size: clamp(2.55rem, 5.2vw, 5rem);
+      line-height: .88;
+      letter-spacing: -.045em;
+    }
+
+    .nice-list-title {
+      display: block;
+      width: fit-content;
+      margin-top: 9px;
+      padding: 7px 14px 8px;
+      color: #173d2e;
+      font: 900 clamp(1rem, 2vw, 1.45rem)/1 Georgia, "Times New Roman", serif;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border-radius: 9px;
+      background: linear-gradient(180deg, #fffbe9, #f1d58a);
+      box-shadow: 0 7px 18px rgba(0,0,0,.24), inset 0 0 0 2px rgba(255,255,255,.52);
+      text-shadow: none;
+      transform: rotate(-1deg);
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      color: rgba(255,255,255,.94);
+      font-size: 1.04rem;
+      font-weight: 650;
+      text-shadow: 0 2px 7px rgba(0,0,0,.30);
+    }
+
+    .hero-scene {
+      position: relative;
+      z-index: 2;
+      width: 220px;
+      min-height: 178px;
+      align-self: end;
+      filter: drop-shadow(0 13px 18px rgba(0,0,0,.30));
+    }
+
+    .hero-moon {
+      position: absolute;
+      right: 18px;
+      top: 0;
+      width: 84px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #8f1d2c;
+      background: radial-gradient(circle at 36% 30%, #fffef3, #f5dc96 66%, #d9a441 100%);
+      box-shadow: 0 0 28px rgba(255,231,157,.54);
+      font-size: 2.5rem;
+    }
+
+    .hero-tree {
+      position: absolute;
+      left: 3px;
+      bottom: 0;
+      font-size: 7.4rem;
+      line-height: 1;
+      transform: rotate(-2deg);
+      filter: drop-shadow(0 0 10px rgba(255,217,98,.30));
+    }
+
+    .hero-gifts {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      font-size: 3.4rem;
+      line-height: 1;
+      transform: rotate(3deg);
+    }
+
+    .hero-sparkles {
+      position: absolute;
+      right: 55px;
+      bottom: 56px;
+      color: #fff2b3;
+      font-size: 2rem;
+      text-shadow: 0 0 12px #ffd45c;
+    }
+
+    .meta-chip {
+      border-color: rgba(255,255,255,.34);
+      background: rgba(5,43,30,.54);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 5px 14px rgba(0,0,0,.16);
+    }
+
+    .card {
+      border-width: 4px;
+      border-color: transparent;
+      background:
+        radial-gradient(circle at 100% 0, rgba(217,164,65,.14), transparent 12rem) padding-box,
+        linear-gradient(180deg, #fffef9, #fff9e9) padding-box,
+        repeating-linear-gradient(135deg, #cf334a 0 10px, #fffdf7 10px 20px, #176247 20px 30px, #fffdf7 30px 40px) border-box;
+      box-shadow: 0 20px 48px rgba(2,22,15,.22), inset 0 0 0 1px rgba(217,164,65,.15);
+    }
+
+    .card::before {
+      content: "✦";
+      position: absolute;
+      right: 13px;
+      top: 8px;
+      z-index: 1;
+      color: rgba(217,164,65,.42);
+      font-size: 1.45rem;
+      text-shadow: -22px 16px 0 rgba(207,51,74,.12);
+      pointer-events: none;
+    }
+
+    .card-header {
+      position: relative;
+      padding-bottom: 12px;
+      border-bottom: 2px dashed rgba(179,38,59,.17);
+    }
+
+    .card-header::after {
+      content: "🎄";
+      position: absolute;
+      right: 0;
+      bottom: -13px;
+      padding: 0 5px;
+      background: #fffbed;
+      font-size: 1rem;
+    }
+
+    .section-kicker { color: var(--berry-700); }
+
+    .step-badge,
+    .count-orb {
+      position: relative;
+      border: 3px solid rgba(255,255,255,.72);
+      background: radial-gradient(circle at 33% 25%, #ef5268, var(--berry-700) 58%, #7d1323);
+      box-shadow: 0 8px 19px rgba(143,29,44,.30), inset 0 3px 5px rgba(255,255,255,.28);
+    }
+
+    .step-badge::before,
+    .count-orb::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -9px;
+      width: 13px;
+      height: 8px;
+      border: 2px solid #b78830;
+      border-bottom: 0;
+      border-radius: 7px 7px 0 0;
+      transform: translateX(-50%);
+    }
+
+    input[type="text"] {
+      border-color: rgba(23,98,71,.30);
+      background:
+        radial-gradient(circle at 97% 19%, rgba(207,51,74,.07) 0 3px, transparent 4px),
+        radial-gradient(circle at 94% 62%, rgba(23,98,71,.07) 0 3px, transparent 4px),
+        #fff;
+      box-shadow: inset 0 0 0 1px rgba(217,164,65,.10), 0 4px 12px rgba(8,38,29,.05);
+    }
+
+    .button-primary {
+      border: 2px solid rgba(255,255,255,.58);
+      background: linear-gradient(110deg, #9f172c, #df3550 49%, #ad1f36);
+      box-shadow: 0 10px 22px rgba(143,29,44,.30), inset 0 2px 0 rgba(255,255,255,.22);
+      text-shadow: 0 2px 4px rgba(0,0,0,.22);
+    }
+
+    .button-secondary {
+      border: 2px solid rgba(255,255,255,.58);
+      background: linear-gradient(110deg, #0a3d2c, #197653 55%, #0d4a35);
+      box-shadow: 0 10px 22px rgba(18,75,57,.25), inset 0 2px 0 rgba(255,255,255,.18);
+      text-shadow: 0 2px 4px rgba(0,0,0,.20);
+    }
+
+    .action-tile {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(179,38,59,.18);
+      background:
+        linear-gradient(90deg, transparent 46%, rgba(207,51,74,.10) 46% 54%, transparent 54%),
+        linear-gradient(0deg, transparent 42%, rgba(23,98,71,.09) 42% 52%, transparent 52%),
+        linear-gradient(180deg, #fff, #fff4d9);
+      box-shadow: 0 7px 16px rgba(8,38,29,.08), inset 0 0 0 1px rgba(255,255,255,.8);
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+    }
+
+    .action-tile::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      width: 28px;
+      height: 18px;
+      border: 6px solid rgba(207,51,74,.24);
+      border-bottom: 0;
+      border-radius: 50% 50% 0 0;
+      transform: translateX(-50%);
+    }
+
+    .action-tile:hover {
+      transform: translateY(-3px) rotate(-.35deg);
+      border-color: rgba(179,38,59,.36);
+      box-shadow: 0 12px 24px rgba(8,38,29,.14);
+    }
+
+    .success-panel {
+      border: 2px solid rgba(23,98,71,.28);
+      background:
+        radial-gradient(circle at 96% 6%, rgba(255,255,255,.78) 0 2px, transparent 3px),
+        linear-gradient(120deg, rgba(23,98,71,.11), rgba(217,164,65,.17));
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.46);
+    }
+
+    .preview-row,
+    .party-row,
+    .detail-item,
+    .group-card,
+    .choice-card {
+      box-shadow: 0 4px 12px rgba(8,38,29,.055);
+    }
+
+    dialog {
+      border: 4px solid transparent;
+      background:
+        linear-gradient(var(--cream-50), var(--cream-50)) padding-box,
+        repeating-linear-gradient(135deg, #cf334a 0 10px, #fffdf7 10px 20px, #176247 20px 30px, #fffdf7 30px 40px) border-box;
+    }
+
+    .dialog-header {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 88% 20%, rgba(241,213,138,.22), transparent 10rem),
+        linear-gradient(110deg, #092f23, #176247 60%, #9d1c30 140%);
+    }
+
+    .dialog-header::after {
+      content: "❄  ✦  ❄";
+      position: absolute;
+      right: 74px;
+      top: 50%;
+      color: rgba(255,255,255,.20);
+      transform: translateY(-50%);
+      letter-spacing: .28em;
+      font-size: 1.2rem;
+    }
+
+    .mobile-nav {
+      border-top: 3px solid rgba(241,213,138,.85);
+      background:
+        radial-gradient(circle at 50% -20%, rgba(207,51,74,.42), transparent 9rem),
+        rgba(5,38,27,.96);
+    }
+
+    .nav-button.active {
+      color: #fff6c8;
+      background: linear-gradient(145deg, rgba(207,51,74,.45), rgba(255,255,255,.10));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+
+    .christmas-footer {
+      margin: 18px auto 0;
+      padding: 12px 18px;
+      color: rgba(255,255,255,.84);
+      text-align: center;
+      font: 700 .86rem/1.35 Georgia, "Times New Roman", serif;
+      letter-spacing: .04em;
+      text-shadow: 0 2px 5px rgba(0,0,0,.30);
+    }
+
+    .christmas-footer strong { color: #ffe59a; }
+
+
+    @media (max-width: 900px) {
+
+      .north-pole-banner {
+        margin-bottom: 7px;
+        padding: 6px 13px 7px;
+        font-size: .66rem;
+        letter-spacing: .09em;
+      }
+
+      .light-string {
+        height: 35px;
+        margin-top: -3px;
+      }
+
+      .bulb { top: 9px; width: 10px; height: 14px; }
+
+      .hero {
+        min-height: 0;
+        padding: 23px 18px 20px;
+        border-width: 4px;
+      }
+
+      .hero-ornament:nth-child(2),
+      .hero-ornament:nth-child(3) { display: none; }
+      .hero-ornament:nth-child(1) { left: auto; right: 21px; }
+
+      .merry-title {
+        max-width: 290px;
+        font-size: clamp(2.35rem, 12vw, 3.2rem);
+      }
+
+      .nice-list-title {
+        margin-top: 8px;
+        font-size: .9rem;
+      }
+
+      .hero-copy { max-width: calc(100% - 74px); }
+
+      .hero-scene {
+        display: block;
+        position: absolute;
+        right: 7px;
+        bottom: 8px;
+        width: 78px;
+        min-height: 92px;
+        opacity: .92;
+      }
+
+      .hero-moon {
+        right: 2px;
+        top: 0;
+        width: 43px;
+        font-size: 1.25rem;
+      }
+
+      .hero-tree { left: -5px; font-size: 4rem; }
+      .hero-gifts { right: -3px; font-size: 1.8rem; }
+      .hero-sparkles { display: none; }
+
+      .card { border-width: 3px; }
+      .card-header::after { right: 4px; }
+      .christmas-footer { margin-top: 8px; padding-bottom: 0; font-size: .78rem; }
+
+      body {
+        padding: 12px 12px calc(92px + var(--safe-bottom));
+      }
+
+      .light-string { margin-bottom: 4px; }
+
+      .hero {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      .wreath { display: none; }
+      .hero-copy { font-size: .92rem; }
+      .meta-bar { gap: 6px; }
+      .meta-chip { min-height: 30px; padding: 5px 9px; font-size: .8rem; }
+
+      .layout {
+        grid-template-columns: 1fr;
+        margin-top: 12px;
+      }
+
+      .side-column { display: none; }
+
+      .card { border-radius: 22px; }
+      .card-inner { padding: 18px; }
+      .card-header { margin-bottom: 13px; }
+
+      .name-row {
+        grid-template-columns: 1fr;
+      }
+
+      .name-row .button {
+        width: 100%;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .action-tile {
+        min-height: 76px;
+        padding: 9px 6px;
+        font-size: .82rem;
+      }
+
+      .action-tile small { display: none; }
+
+      .mobile-nav {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: calc(8px + var(--safe-bottom));
+        z-index: 80;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 7px;
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 20px;
+        background: rgba(8, 38, 29, .94);
+        box-shadow: 0 16px 44px rgba(0,0,0,.34);
+        backdrop-filter: blur(14px);
+      }
+
+      .nav-button {
+        display: grid;
+        justify-items: center;
+        gap: 2px;
+        min-height: 52px;
+        padding: 5px 2px;
+        color: white;
+        border: 0;
+        border-radius: 14px;
+        background: transparent;
+        font-size: .72rem;
+        font-weight: 760;
+        cursor: pointer;
+      }
+
+      .nav-button span:first-child { font-size: 1.2rem; }
+
+      .nav-button.active {
+        background: rgba(255,255,255,.12);
+      }
+
+      dialog {
+        width: 100vw;
+        max-width: none;
+        max-height: 92dvh;
+        margin: auto 0 0;
+        border-radius: 24px 24px 0 0;
+      }
+
+      .dialog-shell { max-height: 92dvh; }
+      .dialog-body { padding: 16px; }
+      .dialog-footer { justify-content: stretch; }
+      .dialog-footer .button { flex: 1; }
+      .list-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 1.88rem; }
+      .quick-actions { gap: 7px; }
+      .action-tile { font-size: .76rem; }
+      .card-inner { padding: 16px; }
+      .radio-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+<style>select.demo-select{display:block;width:100%;min-height:48px;padding:12px;border:1px solid #b7c6bf;border-radius:12px;background:#fff;color:#183b37;font:inherit}select.demo-select:focus-visible{outline:3px solid #986119;outline-offset:3px}</style></head>
+<body onload="init()"><div style="padding:10px 18px;background:#fff3ce;color:#49330c;font:600 14px/1.5 system-ui;text-align:center" role="note">Interactive portfolio demo · Fictional sample data only. Choose from fictional dropdown options. No personal information can be entered.</div>
+  <div class="north-pole-banner" aria-hidden="true">✦ Special delivery from the North Pole ✦</div>
+  <div class="loading-overlay" id="loadingOverlay" aria-live="polite">
+    <div class="loading-box">
+      <div class="spinner" aria-hidden="true"></div>
+      <strong>Checking Santa’s list…</strong>
+      <span>Loading the latest guests and dishes.</span>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <div class="light-string" aria-hidden="true">
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+    </div>
+
+    <header class="hero">
+      <div class="hero-ornaments" aria-hidden="true"><span class="hero-ornament"></span><span class="hero-ornament"></span><span class="hero-ornament"></span></div>
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">🎄 The Snow Family Christmas 🎄</p>
+        <h1><span class="merry-title">Merry Christmas!</span><span class="nice-list-title">Santa’s Nice List</span></h1>
+        <p class="hero-copy">Join the family celebration, add your guests, and choose a holiday dish—all wrapped up in one quick RSVP.</p>
+        <div class="meta-bar" id="metaBar" aria-label="Event details"></div>
+      </div>
+      <div class="hero-scene" aria-hidden="true">
+        <div class="hero-moon">🎅</div>
+        <div class="hero-tree">🎄</div>
+        <div class="hero-gifts">🎁</div>
+        <div class="hero-sparkles">✨</div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="stack" aria-label="Christmas RSVP">
+        <article class="card">
+          <div class="card-inner">
+            <div class="card-header">
+              <div>
+                <p class="section-kicker">Start here</p>
+                <h2>Are you coming?</h2>
+                <p class="helper">Choose a fictional name. Dishes are optional, and sample guests come next.</p>
+              </div>
+              <div class="step-badge" aria-hidden="true">1</div>
+            </div>
+
+            <div class="name-row">
+              <div class="field" style="margin-top:0">
+                <label for="inviterInput">Fictional name <span class="required">(required)</span></label>
+                <select class="demo-select" id="inviterInput" name="inviterInput" aria-label="Fictional party name"><option value="Alex Example">Alex Example</option><option value="Morgan Sample">Morgan Sample</option><option value="Taylor Demo">Taylor Demo</option><option value="Casey Placeholder">Casey Placeholder</option><option value="Holly Snow">Holly Snow</option><option value="Noel Snow">Noel Snow</option><option value="Nick Frost">Nick Frost</option><option value="Jolly Evergreen">Jolly Evergreen</option><option value="Holly Maple">Holly Maple</option><option value="Oliver Acorn">Oliver Acorn</option><option value="Autumn Fields">Autumn Fields</option></select>
+                <div class="helper" id="nameHelp">Returning? Use the same name to view or update your party.</div>
+              </div>
+              <button class="button button-primary" id="rsvpButton" type="button" onclick="saveRsvp()">⭐ Save my RSVP</button>
+            </div>
+
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+
+            <div class="success-panel" id="successPanel">
+              <div class="success-heading"><span aria-hidden="true">🎄</span><span id="successHeading">You’re on the Nice List!</span></div>
+              <div class="my-party" id="myPartyPreview"></div>
+
+              <div class="quick-actions">
+                <button class="action-tile" type="button" onclick="openGuestDialog()">
+                  <span aria-hidden="true">➕</span>
+                  <span>Add guest</span>
+                  <small>Name + age</small>
+                </button>
+                <button class="action-tile" type="button" onclick="openDishDialog()">
+                  <span aria-hidden="true">🍽️</span>
+                  <span>Choose dishes</span>
+                  <small>Optional</small>
+                </button>
+                <button class="action-tile" type="button" onclick="openNiceListDialog()">
+                  <span aria-hidden="true">🌲</span>
+                  <span>Guest list</span>
+                  <small>See everyone</small>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" id="mobileSummaryCard">
+          <div class="card-inner">
+            <div class="card-header">
+              <div>
+                <p class="section-kicker">At a glance</p>
+                <h2>Christmas is coming</h2>
+                <p class="helper" id="mobileSummaryText">Loading the party snapshot…</p>
+              </div>
+              <div class="count-orb" id="mobileCountOrb">0</div>
+            </div>
+            <div class="quick-actions">
+              <button class="action-tile" type="button" onclick="openNiceListDialog()">
+                <span aria-hidden="true">👥</span><span>Nice List</span><small>Guests</small>
+              </button>
+              <button class="action-tile" type="button" onclick="openFoodDialog()">
+                <span aria-hidden="true">🥧</span><span>Dishes</span><small>Open spots</small>
+              </button>
+              <button class="action-tile" type="button" onclick="openDetailsDialog()">
+                <span aria-hidden="true">🎅</span><span>Details</span><small>Gifts + help</small>
+              </button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <aside class="stack side-column" aria-label="Party dashboard">
+        <article class="card side-card">
+          <div class="card-inner">
+            <div class="card-header">
+              <div>
+                <p class="section-kicker">Who’s coming</p>
+                <h2>Nice List</h2>
+              </div>
+              <div class="count-orb" id="guestCount">0</div>
+            </div>
+            <div class="preview-list" id="niceListPreview"></div>
+            <div class="side-actions">
+              <button class="button button-secondary" type="button" onclick="openNiceListDialog()">View everyone</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card side-card">
+          <div class="card-inner">
+            <div class="card-header">
+              <div>
+                <p class="section-kicker">Potluck</p>
+                <h2>Holiday dishes</h2>
+              </div>
+              <div class="count-orb" id="openDishCount">0</div>
+            </div>
+            <div class="preview-list" id="foodPreview"></div>
+            <div class="side-actions">
+              <button class="button button-secondary" type="button" onclick="openFoodDialog()">View dish lineup</button>
+              <button class="button button-ghost" type="button" onclick="openDishDialog()">Claim dishes</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card side-card">
+          <div class="card-inner">
+            <div class="card-header">
+              <div>
+                <p class="section-kicker">Good to know</p>
+                <h2>Party details</h2>
+              </div>
+              <span aria-hidden="true" style="font-size:2rem">🎁</span>
+            </div>
+            <p class="helper">Gift guidance, White Elephant rules, games, and contact information.</p>
+            <div class="side-actions">
+              <button class="button button-ghost" type="button" onclick="openDetailsDialog()">Open details</button>
+            </div>
+          </div>
+        </article>
+      </aside>
+    </main>
+    <footer class="christmas-footer">❄️ Made with <strong>family, food, gifts, and Christmas cheer</strong> ❄️</footer>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Quick navigation">
+    <button class="nav-button active" type="button" onclick="scrollToRsvp()"><span aria-hidden="true">⭐</span><span>RSVP</span></button>
+    <button class="nav-button" type="button" onclick="openNiceListDialog()"><span aria-hidden="true">👥</span><span>Guests</span></button>
+    <button class="nav-button" type="button" onclick="openFoodDialog()"><span aria-hidden="true">🍽️</span><span>Dishes</span></button>
+    <button class="nav-button" type="button" onclick="openDetailsDialog()"><span aria-hidden="true">🎅</span><span>Details</span></button>
+  </nav>
+
+  <dialog id="guestDialog" aria-labelledby="guestDialogTitle">
+    <form class="dialog-shell" method="dialog" onsubmit="event.preventDefault(); saveGuest();">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" style="color:var(--gold-300)">Add to your party</p>
+          <h2 id="guestDialogTitle">Add a guest</h2>
+        </div>
+        <button class="icon-button" type="button" onclick="closeDialog('guestDialog')" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <p class="helper" id="guestOwnerText">Save your own RSVP first.</p>
+        <div class="field">
+          <label for="guestNameInput">Fictional guest name <span class="required">(required)</span></label>
+          <select class="demo-select" id="guestNameInput" name="guestNameInput" aria-label="Fictional guest name"><option value="Alex Example">Alex Example</option><option value="Morgan Sample">Morgan Sample</option><option value="Taylor Demo">Taylor Demo</option><option value="Casey Placeholder">Casey Placeholder</option><option value="Holly Snow">Holly Snow</option><option value="Noel Snow">Noel Snow</option><option value="Nick Frost">Nick Frost</option><option value="Jolly Evergreen">Jolly Evergreen</option><option value="Holly Maple">Holly Maple</option><option value="Oliver Acorn">Oliver Acorn</option><option value="Autumn Fields">Autumn Fields</option></select>
+        </div>
+        <fieldset>
+          <legend>Age group <span class="required">(required)</span></legend>
+          <div class="radio-grid">
+            <label class="choice-card">
+              <input type="radio" name="guestAge" value="11+">
+              <span><span class="choice-title">11 or older</span><span class="choice-help">Teen or adult</span></span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="guestAge" value="10-">
+              <span><span class="choice-title">10 or younger</span><span class="choice-help">Child gift group</span></span>
+            </label>
+          </div>
+        </fieldset>
+        <div class="status" id="guestStatus" role="status" aria-live="polite"></div>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-ghost" type="button" onclick="closeDialog('guestDialog')">Cancel</button>
+        <button class="button button-primary" id="saveGuestButton" type="submit">Add guest</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dishDialog" aria-labelledby="dishDialogTitle">
+    <form class="dialog-shell" method="dialog" onsubmit="event.preventDefault(); saveDishes();">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" style="color:var(--gold-300)">Optional potluck</p>
+          <h2 id="dishDialogTitle">Choose dishes</h2>
+        </div>
+        <button class="icon-button" type="button" onclick="closeDialog('dishDialog')" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <p class="helper">Check one or more available dishes. Choices already claimed by someone else are disabled.</p>
+        <div class="choice-grid" id="dishChoices"></div>
+        <div class="status" id="dishStatus" role="status" aria-live="polite"></div>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-ghost" type="button" onclick="closeDialog('dishDialog')">Cancel</button>
+        <button class="button button-primary" id="saveDishButton" type="submit">Save dishes</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="niceListDialog" aria-labelledby="niceListDialogTitle">
+    <div class="dialog-shell">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" style="color:var(--gold-300)">Party roster</p>
+          <h2 id="niceListDialogTitle">Santa’s Nice List</h2>
+        </div>
+        <button class="icon-button" type="button" onclick="closeDialog('niceListDialog')" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="list-grid" id="niceListFull"></div>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-secondary" type="button" onclick="closeDialog('niceListDialog')">Done</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="foodDialog" aria-labelledby="foodDialogTitle">
+    <div class="dialog-shell">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" style="color:var(--gold-300)">Potluck board</p>
+          <h2 id="foodDialogTitle">Holiday dish lineup</h2>
+        </div>
+        <button class="icon-button" type="button" onclick="closeDialog('foodDialog')" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="detail-list" id="foodListFull"></div>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-secondary" type="button" onclick="closeDialog('foodDialog')">Done</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="detailsDialog" aria-labelledby="detailsDialogTitle">
+    <div class="dialog-shell">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" style="color:var(--gold-300)">Before the party</p>
+          <h2 id="detailsDialogTitle">Christmas details</h2>
+        </div>
+        <button class="icon-button" type="button" onclick="closeDialog('detailsDialog')" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="detail-list" id="detailsList"></div>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-secondary" type="button" onclick="closeDialog('detailsDialog')">Done</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // This demo runs only through its own Apps Script backend.
+
+    const state = {
+      meta: {},
+      attendees: [],
+      menu: [],
+      currentOwner: null,
+      saving: false
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const normalize = (value) => String(value || '').trim().replace(/\s+/g, ' ').toLowerCase();
+    const cleanName = (value) => String(value || '').trim().replace(/\s+/g, ' ');
+    const parseFoods = (value) => {
+      if (Array.isArray(value)) return value.map(String).map(v => v.trim()).filter(Boolean);
+      return String(value || '').split(/[;,\n]/).map(v => v.trim()).filter(Boolean);
+    };
+
+    function toShortName(fullName) {
+      const parts = cleanName(fullName).split(' ').filter(Boolean);
+      if (parts.length < 2) return parts[0] || '';
+      return parts[0] + ' ' + parts[parts.length - 1].charAt(0).toUpperCase() + '.';
+    }
+
+    function isOwner(attendee) {
+      return attendee && normalize(attendee.fullName) === normalize(attendee.enteredBy || attendee.fullName);
+    }
+
+    function uniqueAttendees(list) {
+      const seen = new Set();
+      return (list || []).filter((item) => {
+        const key = item && item.row != null
+          ? 'row:' + item.row
+          : normalize(item.fullName) + '|' + normalize(item.enteredBy);
+        if (!key || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function groupAttendees() {
+      const groups = new Map();
+      uniqueAttendees(state.attendees).forEach((attendee) => {
+        const label = cleanName(attendee.enteredBy || attendee.fullName || 'Host');
+        const key = normalize(label);
+        if (!groups.has(key)) groups.set(key, { inviter: label, people: [] });
+        groups.get(key).people.push(attendee);
+      });
+      return Array.from(groups.values()).sort((a, b) => a.inviter.localeCompare(b.inviter));
+    }
+
+    function findOwnerByName(name) {
+      const key = normalize(name);
+      return state.attendees.find((attendee) => isOwner(attendee) && normalize(attendee.fullName) === key) || null;
+    }
+
+    function getOwnerParty(owner) {
+      if (!owner) return [];
+      const ownerName = normalize(owner.fullName);
+      return uniqueAttendees(state.attendees)
+        .filter((attendee) => normalize(attendee.enteredBy || attendee.fullName) === ownerName)
+        .sort((a, b) => {
+          if (isOwner(a) && !isOwner(b)) return -1;
+          if (!isOwner(a) && isOwner(b)) return 1;
+          return cleanName(a.fullName).localeCompare(cleanName(b.fullName));
+        });
+    }
+
+    function claimedDishMap() {
+      const claims = new Map();
+      state.attendees.filter(isOwner).forEach((owner) => {
+        parseFoods(owner.food).forEach((dish) => {
+          const key = normalize(dish);
+          if (!key) return;
+          if (!claims.has(key)) claims.set(key, []);
+          claims.get(key).push(owner);
+        });
+      });
+      return claims;
+    }
+
+    function callBackend(action, payload) {
+      if (window.google && google.script && google.script.run) {
+        return new Promise((resolve, reject) => {
+          let runner = google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler((error) => reject(new Error(error && error.message ? error.message : String(error))));
+          runner[action](payload);
+        });
+      }
+
+      return Promise.reject(new Error('Open this demo in its Google Apps Script web app.'));
+    }
+
+    async function init() {
+      bindEvents();
+      try {
+        const data = await callBackend('getChristmasData');
+        applyData(data);
+        const remembered = cleanName(sessionStorage.getItem('christmas2025Name'));
+        if (remembered) {
+          $('inviterInput').value = remembered;
+          hydrateOwner(remembered, false);
+        }
+        setStatus('', 'success');
+      } catch (error) {
+        setStatus('Could not load the signup sheet. Please refresh or try again shortly. ' + error.message, 'error');
+      } finally {
+        $('loadingOverlay').classList.add('hidden');
+      }
+    }
+
+    function bindEvents() {
+      $('inviterInput').addEventListener('input', () => {
+        $('inviterInput').removeAttribute('aria-invalid');
+        const exact = findOwnerByName($('inviterInput').value);
+        if (exact) {
+          hydrateOwner(exact.fullName, false);
+          setStatus('Welcome back, ' + toShortName(exact.fullName) + '. Your party is ready to update.', 'success');
+        } else if (state.currentOwner && normalize(state.currentOwner.fullName) !== normalize($('inviterInput').value)) {
+          state.currentOwner = null;
+          renderMyParty();
+        }
+      });
+
+      document.querySelectorAll('dialog').forEach((dialog) => {
+        dialog.addEventListener('click', (event) => {
+          if (event.target === dialog) dialog.close();
+        });
+      });
+    }
+
+    function applyData(data) {
+      state.meta = data && data.meta ? data.meta : {};
+      state.attendees = uniqueAttendees(data && data.attendees ? data.attendees : []);
+      state.menu = Array.from(new Set((data && data.menu ? data.menu : []).map(cleanName).filter(Boolean)));
+      renderAll();
+    }
+
+    function renderAll() {
+      renderMeta();
+      renderNiceList();
+      renderFood();
+      renderDetails();
+      renderMyParty();
+      renderSummary();
+    }
+
+    function renderMeta() {
+      const meta = state.meta || {};
+      const chips = [
+        ['📅', meta.date || '12/24'],
+        meta.time ? ['🕰️', meta.time] : null,
+        meta.address ? ['📍', meta.address] : null,
+        ['👥', uniqueAttendees(state.attendees).length + ' signed up']
+      ].filter(Boolean);
+
+      $('metaBar').innerHTML = '';
+      chips.forEach(([icon, text]) => {
+        const chip = document.createElement('span');
+        chip.className = 'meta-chip';
+        chip.textContent = icon + ' ' + text;
+        $('metaBar').appendChild(chip);
+      });
+    }
+
+    function renderSummary() {
+      const total = uniqueAttendees(state.attendees).length;
+      const claims = claimedDishMap();
+      const open = state.menu.filter((item) => !claims.has(normalize(item))).length;
+      $('guestCount').textContent = String(total);
+      $('mobileCountOrb').textContent = String(total);
+      $('openDishCount').textContent = String(open);
+      $('mobileSummaryText').textContent = total
+        ? total + ' guest' + (total === 1 ? '' : 's') + ' signed up • ' + open + ' dish' + (open === 1 ? '' : 'es') + ' still open'
+        : 'Be the first person to join Santa’s Nice List.';
+    }
+
+    function renderNiceList() {
+      const groups = groupAttendees();
+      const preview = $('niceListPreview');
+      const full = $('niceListFull');
+      preview.innerHTML = '';
+      full.innerHTML = '';
+
+      if (!groups.length) {
+        preview.innerHTML = '<div class="empty-state">No RSVPs yet. Be the first star on the tree.</div>';
+        full.innerHTML = '<div class="empty-state">No RSVPs yet.</div>';
+        return;
+      }
+
+      groups.slice(0, 3).forEach((group) => {
+        const row = document.createElement('div');
+        row.className = 'preview-row';
+        row.innerHTML =
+          '<div class="preview-main"><span aria-hidden="true">⭐</span><span>' + escapeHtml(toShortName(group.inviter)) + '</span></div>' +
+          '<div class="preview-meta">' + group.people.length + ' in party</div>';
+        preview.appendChild(row);
+      });
+
+      if (groups.length > 3) {
+        const more = document.createElement('div');
+        more.className = 'helper';
+        more.textContent = '+' + (groups.length - 3) + ' more family group' + (groups.length - 3 === 1 ? '' : 's');
+        preview.appendChild(more);
+      }
+
+      groups.forEach((group) => {
+        const card = document.createElement('section');
+        card.className = 'group-card';
+
+        const people = group.people.slice().sort((a, b) => {
+          if (isOwner(a) && !isOwner(b)) return -1;
+          if (!isOwner(a) && isOwner(b)) return 1;
+          return cleanName(a.fullName).localeCompare(cleanName(b.fullName));
+        });
+
+        const title = document.createElement('div');
+        title.className = 'group-title';
+        title.innerHTML = '<span>⭐ ' + escapeHtml(toShortName(group.inviter)) + '</span><span>' + people.length + '</span>';
+        card.appendChild(title);
+
+        const members = document.createElement('div');
+        members.className = 'group-members';
+        people.forEach((person) => {
+          const member = document.createElement('div');
+          member.className = 'group-member';
+          const age = isOwner(person) ? 'Host' : (person.ageGroup === '10-' ? '10 or under' : '11+');
+          member.innerHTML = '<span>' + (isOwner(person) ? '🎄 ' : person.ageGroup === '10-' ? '🧸 ' : '✨ ') +
+            escapeHtml(toShortName(person.fullName)) + '</span><span class="preview-meta">' + age + '</span>';
+          members.appendChild(member);
+        });
+        card.appendChild(members);
+        full.appendChild(card);
+      });
+    }
+
+    function renderFood() {
+      const claims = claimedDishMap();
+      const preview = $('foodPreview');
+      const full = $('foodListFull');
+      preview.innerHTML = '';
+      full.innerHTML = '';
+
+      if (!state.menu.length && claims.size === 0) {
+        preview.innerHTML = '<div class="empty-state">The dish list has not been added yet.</div>';
+        full.innerHTML = '<div class="empty-state">The dish list has not been added yet.</div>';
+        return;
+      }
+
+      const menuItems = state.menu.slice();
+      const extras = [];
+      claims.forEach((owners, key) => {
+        if (!menuItems.some((item) => normalize(item) === key)) {
+          extras.push({ label: parseFoods(owners[0].food).find((food) => normalize(food) === key) || key, owners });
+        }
+      });
+
+      menuItems.slice(0, 4).forEach((item) => {
+        const owners = claims.get(normalize(item)) || [];
+        const row = document.createElement('div');
+        row.className = 'preview-row';
+        row.innerHTML =
+          '<div class="preview-main"><span aria-hidden="true">' + (owners.length ? '✅' : '🍽️') + '</span><span>' + escapeHtml(item) + '</span></div>' +
+          '<div class="preview-meta">' + (owners.length ? owners.map(o => escapeHtml(toShortName(o.fullName))).join(', ') : 'Open') + '</div>';
+        preview.appendChild(row);
+      });
+
+      menuItems.forEach((item) => appendFoodDetail(full, item, claims.get(normalize(item)) || []));
+      extras.forEach((entry) => appendFoodDetail(full, entry.label, entry.owners, true));
+    }
+
+    function appendFoodDetail(container, item, owners, bonus) {
+      const row = document.createElement('div');
+      row.className = 'detail-item';
+      const ownerText = owners.length ? owners.map((owner) => toShortName(owner.fullName)).join(', ') : 'Open to claim';
+      row.innerHTML =
+        '<div class="detail-icon">' + (owners.length ? '✅' : '🍽️') + '</div>' +
+        '<div><strong>' + escapeHtml(item) + '</strong>' +
+        '<div class="helper">' + (bonus ? 'Bonus dish • ' : '') + escapeHtml(ownerText) + '</div></div>';
+      container.appendChild(row);
+    }
+
+    function renderDetails() {
+      const meta = state.meta || {};
+      const details = [
+        ['📅', 'When', [meta.date || 'December 24', meta.time || 'Time listed by the host'].filter(Boolean).join(' • ')],
+        ['📍', 'Where', meta.address || 'Address listed by the host'],
+        ['🎁', 'Kids’ gifts', 'Families may bring a couple of gifts for their own little ones to open. No obligation to bring gifts for anyone else.'],
+        ['🐘', 'Optional White Elephant', '$20 budget • wrapped • no gag gifts • no gift cards • no cash.'],
+        ['🎲', 'Games and prizes', 'Provided by the host.'],
+        ['💬', 'Questions', meta.questions || 'Contact the host for details.']
+      ];
+
+      $('detailsList').innerHTML = '';
+      details.forEach(([icon, title, copy]) => {
+        const item = document.createElement('div');
+        item.className = 'detail-item';
+        item.innerHTML =
+          '<div class="detail-icon">' + icon + '</div>' +
+          '<div><strong>' + escapeHtml(title) + '</strong><div class="helper">' + escapeHtml(copy) + '</div></div>';
+        $('detailsList').appendChild(item);
+      });
+    }
+
+    function renderMyParty() {
+      const panel = $('successPanel');
+      const preview = $('myPartyPreview');
+
+      if (!state.currentOwner) {
+        panel.classList.remove('visible');
+        preview.innerHTML = '';
+        return;
+      }
+
+      const party = getOwnerParty(state.currentOwner);
+      panel.classList.add('visible');
+      $('successHeading').textContent = toShortName(state.currentOwner.fullName) + ' is on the Nice List!';
+      preview.innerHTML = '';
+
+      party.forEach((person) => {
+        const row = document.createElement('div');
+        row.className = 'party-row';
+        const meta = isOwner(person)
+          ? (parseFoods(person.food).length ? parseFoods(person.food).join(', ') : 'No dish selected')
+          : (person.ageGroup === '10-' ? '10 or under' : '11+');
+        row.innerHTML =
+          '<div class="party-person"><span aria-hidden="true">' + (isOwner(person) ? '⭐' : person.ageGroup === '10-' ? '🧸' : '✨') + '</span>' +
+          '<span>' + escapeHtml(toShortName(person.fullName)) + '</span></div>' +
+          '<div class="party-meta">' + escapeHtml(meta) + '</div>';
+        preview.appendChild(row);
+      });
+    }
+
+    function hydrateOwner(name, announce = true) {
+      const owner = findOwnerByName(name);
+      if (!owner) return false;
+      state.currentOwner = owner;
+      $('inviterInput').value = cleanName(owner.fullName);
+      sessionStorage.setItem('christmas2025Name', cleanName(owner.fullName));
+      renderMyParty();
+      if (announce) showToast('Loaded ' + toShortName(owner.fullName) + '’s party.');
+      return true;
+    }
+
+    async function saveRsvp() {
+      const input = $('inviterInput');
+      const name = cleanName(input.value);
+
+      if (!name) {
+        input.setAttribute('aria-invalid', 'true');
+        input.focus();
+        setStatus('Choose a fictional name to save your RSVP.', 'error');
+        return;
+      }
+
+      if (name.length < 2) {
+        input.setAttribute('aria-invalid', 'true');
+        input.focus();
+        setStatus('Please enter a valid name.', 'error');
+        return;
+      }
+
+      const existing = findOwnerByName(name);
+      const payload = {
+        row: existing ? existing.row : null,
+        fullName: name,
+        ageGroup: '11+',
+        food: existing ? parseFoods(existing.food) : [],
+        enteredBy: name
+      };
+
+      setSaving(true);
+      setStatus(existing ? 'Updating your RSVP…' : 'Adding you to Santa’s Nice List…', 'success');
+
+      try {
+        const data = await callBackend('saveAttendee', payload);
+        applyData(data);
+        hydrateOwner(name, false);
+        sessionStorage.setItem('christmas2025Name', name);
+        setStatus('Saved! Add guests or choose a dish whenever you’re ready.', 'success');
+        showToast('🎄 RSVP saved');
+      } catch (error) {
+        setStatus('Your RSVP was not saved. ' + error.message, 'error');
+      } finally {
+        setSaving(false);
+      }
+    }
+
+    function openGuestDialog() {
+      if (!requireOwner()) return;
+      $('guestOwnerText').textContent = 'This guest will be added under ' + toShortName(state.currentOwner.fullName) + '.';
+      $('guestNameInput').value = '';
+      document.querySelectorAll('input[name="guestAge"]').forEach((radio) => radio.checked = false);
+      setDialogStatus('guestStatus', '', '');
+      openDialog('guestDialog', 'guestNameInput');
+    }
+
+    async function saveGuest() {
+      if (!requireOwner()) return;
+      const nameInput = $('guestNameInput');
+      const name = cleanName(nameInput.value);
+      const age = document.querySelector('input[name="guestAge"]:checked');
+
+      if (!name) {
+        nameInput.setAttribute('aria-invalid', 'true');
+        nameInput.focus();
+        setDialogStatus('guestStatus', 'Enter the guest’s full name.', 'error');
+        return;
+      }
+
+      if (!age) {
+        setDialogStatus('guestStatus', 'Choose an age group for this guest.', 'error');
+        return;
+      }
+
+      const existing = state.attendees.find((attendee) =>
+        normalize(attendee.fullName) === normalize(name) &&
+        normalize(attendee.enteredBy) === normalize(state.currentOwner.fullName)
+      );
+
+      $('saveGuestButton').disabled = true;
+      setDialogStatus('guestStatus', 'Saving guest…', '');
+
+      try {
+        const data = await callBackend('saveAttendee', {
+          row: existing ? existing.row : null,
+          fullName: name,
+          ageGroup: age.value,
+          food: [],
+          enteredBy: state.currentOwner.fullName
+        });
+        const ownerName = state.currentOwner.fullName;
+        applyData(data);
+        hydrateOwner(ownerName, false);
+        closeDialog('guestDialog');
+        showToast('🎁 ' + toShortName(name) + ' added');
+        setStatus('Guest added to your party.', 'success');
+      } catch (error) {
+        setDialogStatus('guestStatus', 'Guest was not saved. ' + error.message, 'error');
+      } finally {
+        $('saveGuestButton').disabled = false;
+      }
+    }
+
+    function openDishDialog() {
+      if (!requireOwner()) return;
+      const owner = state.currentOwner;
+      const ownerFoods = new Set(parseFoods(owner.food).map(normalize));
+      const claims = claimedDishMap();
+      const container = $('dishChoices');
+      container.innerHTML = '';
+
+      if (!state.menu.length) {
+        container.innerHTML = '<div class="empty-state">The host has not added dish choices yet.</div>';
+      } else {
+        state.menu.forEach((item) => {
+          const key = normalize(item);
+          const owners = claims.get(key) || [];
+          const selectedByOwner = ownerFoods.has(key);
+          const claimedByOther = owners.some((person) => normalize(person.fullName) !== normalize(owner.fullName));
+
+          const label = document.createElement('label');
+          label.className = 'choice-card' + (claimedByOther && !selectedByOwner ? ' disabled' : '');
+          label.innerHTML =
+            '<input type="checkbox" name="dishChoice" value="' + escapeAttribute(item) + '"' +
+            (selectedByOwner ? ' checked' : '') +
+            (claimedByOther && !selectedByOwner ? ' disabled' : '') + '>' +
+            '<span><span class="choice-title">' + escapeHtml(item) + '</span>' +
+            '<span class="choice-help">' +
+            (selectedByOwner ? 'Your current choice' :
+              claimedByOther ? 'Claimed by ' + owners.map(person => escapeHtml(toShortName(person.fullName))).join(', ') :
+              'Available') +
+            '</span></span>';
+          container.appendChild(label);
+        });
+      }
+
+      setDialogStatus('dishStatus', '', '');
+      openDialog('dishDialog');
+    }
+
+    async function saveDishes() {
+      if (!requireOwner()) return;
+      const selected = Array.from(document.querySelectorAll('input[name="dishChoice"]:checked')).map((input) => input.value);
+      $('saveDishButton').disabled = true;
+      setDialogStatus('dishStatus', 'Saving dishes…', '');
+
+      try {
+        const ownerName = state.currentOwner.fullName;
+        const data = await callBackend('saveAttendee', {
+          row: state.currentOwner.row,
+          fullName: ownerName,
+          ageGroup: state.currentOwner.ageGroup || '11+',
+          food: selected,
+          enteredBy: state.currentOwner.enteredBy || ownerName
+        });
+        applyData(data);
+        hydrateOwner(ownerName, false);
+        closeDialog('dishDialog');
+        showToast(selected.length ? '🍽️ Dishes saved' : 'Dish choices cleared');
+        setStatus('Your dish choices were updated.', 'success');
+      } catch (error) {
+        setDialogStatus('dishStatus', 'Dishes were not saved. ' + error.message, 'error');
+      } finally {
+        $('saveDishButton').disabled = false;
+      }
+    }
+
+    function requireOwner() {
+      const name = cleanName($('inviterInput').value);
+      if (!state.currentOwner && name) hydrateOwner(name, false);
+      if (state.currentOwner) return true;
+      setStatus('Save your own RSVP first, then add guests or dishes.', 'error');
+      $('inviterInput').focus();
+      return false;
+    }
+
+    function openNiceListDialog() { openDialog('niceListDialog'); }
+    function openFoodDialog() { openDialog('foodDialog'); }
+    function openDetailsDialog() { openDialog('detailsDialog'); }
+
+    function openDialog(id, focusId) {
+      const dialog = $(id);
+      if (!dialog) return;
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+      window.setTimeout(() => {
+        if (focusId && $(focusId)) $(focusId).focus();
+      }, 40);
+    }
+
+    function closeDialog(id) {
+      const dialog = $(id);
+      if (!dialog) return;
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+    }
+
+    function scrollToRsvp() {
+      document.querySelector('main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => $('inviterInput').focus({ preventScroll: true }), 300);
+    }
+
+    function setSaving(saving) {
+      state.saving = saving;
+      $('rsvpButton').disabled = saving;
+      $('rsvpButton').textContent = saving ? 'Saving…' : '⭐ Save my RSVP';
+    }
+
+    function setStatus(message, type) {
+      const el = $('status');
+      el.textContent = message || '';
+      el.className = 'status' + (message && type ? ' ' + type : '');
+    }
+
+    function setDialogStatus(id, message, type) {
+      const el = $(id);
+      el.textContent = message || '';
+      el.className = 'status' + (message && type ? ' ' + type : '');
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = $('toast');
+      toast.textContent = message;
+      toast.classList.add('visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 2400);
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value).replace(/`/g, '&#096;');
+    }
+  </script>
+</body>
+</html>
+
