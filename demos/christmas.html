@@ -1433,8 +1433,8 @@
       }
     }
   </style>
-</head>
-<body onload="init()"><div style="padding:10px 18px;background:#fff3ce;color:#49330c;font:600 14px/1.5 system-ui;text-align:center" role="note">Interactive portfolio demo · Fictional sample data only. Please do not enter personal information.</div>
+<style>select.demo-select{display:block;width:100%;min-height:48px;padding:12px;border:1px solid #b7c6bf;border-radius:12px;background:#fff;color:#183b37;font:inherit}select.demo-select:focus-visible{outline:3px solid #986119;outline-offset:3px}</style></head>
+<body onload="init()"><div style="padding:10px 18px;background:#fff3ce;color:#49330c;font:600 14px/1.5 system-ui;text-align:center" role="note">Interactive portfolio demo · Fictional sample data only. Choose from fictional dropdown options. No personal information can be entered.</div>
   <div class="north-pole-banner" aria-hidden="true">✦ Special delivery from the North Pole ✦</div>
   <div class="loading-overlay" id="loadingOverlay" aria-live="polite">
     <div class="loading-box">
@@ -1474,22 +1474,15 @@
               <div>
                 <p class="section-kicker">Start here</p>
                 <h2>Are you coming?</h2>
-                <p class="helper">Enter your full name. Dishes are optional, and guests come next.</p>
+                <p class="helper">Choose a fictional name. Dishes are optional, and sample guests come next.</p>
               </div>
               <div class="step-badge" aria-hidden="true">1</div>
             </div>
 
             <div class="name-row">
               <div class="field" style="margin-top:0">
-                <label for="inviterInput">Your full name <span class="required">(required)</span></label>
-                <input
-                  type="text"
-                  id="inviterInput"
-                  name="name"
-                  autocomplete="name"
-                  maxlength="120"
-                  aria-describedby="nameHelp"
-                  placeholder="First and last name">
+                <label for="inviterInput">Fictional name <span class="required">(required)</span></label>
+                <select class="demo-select" id="inviterInput" name="inviterInput" aria-label="Fictional party name"><option value="Alex Example">Alex Example</option><option value="Morgan Sample">Morgan Sample</option><option value="Taylor Demo">Taylor Demo</option><option value="Casey Placeholder">Casey Placeholder</option><option value="Holly Snow">Holly Snow</option><option value="Noel Snow">Noel Snow</option><option value="Nick Frost">Nick Frost</option><option value="Jolly Evergreen">Jolly Evergreen</option><option value="Holly Maple">Holly Maple</option><option value="Oliver Acorn">Oliver Acorn</option><option value="Autumn Fields">Autumn Fields</option></select>
                 <div class="helper" id="nameHelp">Returning? Use the same name to view or update your party.</div>
               </div>
               <button class="button button-primary" id="rsvpButton" type="button" onclick="saveRsvp()">⭐ Save my RSVP</button>
@@ -1620,8 +1613,8 @@
       <div class="dialog-body">
         <p class="helper" id="guestOwnerText">Save your own RSVP first.</p>
         <div class="field">
-          <label for="guestNameInput">Guest’s full name <span class="required">(required)</span></label>
-          <input type="text" id="guestNameInput" autocomplete="name" maxlength="120" placeholder="First and last name">
+          <label for="guestNameInput">Fictional guest name <span class="required">(required)</span></label>
+          <select class="demo-select" id="guestNameInput" name="guestNameInput" aria-label="Fictional guest name"><option value="Alex Example">Alex Example</option><option value="Morgan Sample">Morgan Sample</option><option value="Taylor Demo">Taylor Demo</option><option value="Casey Placeholder">Casey Placeholder</option><option value="Holly Snow">Holly Snow</option><option value="Noel Snow">Noel Snow</option><option value="Nick Frost">Nick Frost</option><option value="Jolly Evergreen">Jolly Evergreen</option><option value="Holly Maple">Holly Maple</option><option value="Oliver Acorn">Oliver Acorn</option><option value="Autumn Fields">Autumn Fields</option></select>
         </div>
         <fieldset>
           <legend>Age group <span class="required">(required)</span></legend>
@@ -1815,26 +1808,6 @@
       }
 
       return Promise.reject(new Error('Open this demo in its Google Apps Script web app.'));
-    }
-
-    async function openDemoAdmin() {
-      const password = prompt('Admin password'); if (password === null) return;
-      try {
-        const d = await new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).adminAction(password, 'list', {}));
-        const rows = d.attendees.map(x => x.row + ': ' + x.fullName + ' | ' + x.ageGroup + ' | ' + (x.food || []).join(', ') + ' | ' + x.enteredBy).join('\n');
-        const id = prompt('Entries (ID: name | age | dishes | party):\n' + (rows || 'No entries yet') + '\n\nEnter an ID to edit or delete:'); if (!id) return;
-        const x = d.attendees.find(v => String(v.row) === id.trim()); if (!x) throw new Error('Entry not found.');
-        const name = prompt('Name (leave blank to delete)', x.fullName); if (name === null) return;
-        let action = 'delete', payload = {row:x.row};
-        if (name.trim()) {
-          const age = prompt('Age group (11+ or 10-)',x.ageGroup); if (age === null) return;
-          const food = prompt('Dishes, separated by commas',(x.food||[]).join(', ')); if (food === null) return;
-          const enteredBy = prompt('Party owner name',x.enteredBy); if (enteredBy === null) return;
-          action = 'edit'; payload = {row:x.row,fullName:name.trim(),ageGroup:age,food:food.split(',').map(v=>v.trim()).filter(Boolean),enteredBy};
-        } else if (!confirm('Delete this demo entry?')) return;
-        const updated = await new Promise((ok,no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).adminAction(password,action,payload));
-        applyData(updated); showToast('Demo updated');
-      } catch (e) { alert(e.message || 'Could not update entry.'); }
     }
 
     async function init() {
@@ -2095,7 +2068,7 @@
       if (!name) {
         input.setAttribute('aria-invalid', 'true');
         input.focus();
-        setStatus('Enter your full name to save your RSVP.', 'error');
+        setStatus('Choose a fictional name to save your RSVP.', 'error');
         return;
       }
 

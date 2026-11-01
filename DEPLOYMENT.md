@@ -16,7 +16,7 @@ Ricky chose to leave contact hidden on November 1. Blank Business Email / Busine
 
 Installed project: https://script.google.com/home/projects/1inL6XlT73wLnvLQuwDIToQ1jnhOxR-nTR254m9yLCaCiA7DVr7ZhAuPS/edit
 
-Install `demos/Code.gs` as this project's only server source and use `demos/appsscript.json`. The bundle contains four original-derived frontends, with fictional sample labels. It routes `?demo=christmas`, `?demo=thanksgiving`, `?demo=decker`, and `?demo=rafa` to their separate adapters. Each adapter uses only its assigned synthetic data source. No original baby Sheet ID is present in the deployable source. Public admin mutations are disabled. Submissions are capped at 200 entries per demo, with validation and formula escaping. This cap is not a comprehensive anti-abuse/rate-limiting system.
+Install `demos/Code.gs` as this project's only server source and use `demos/appsscript.json`. The bundle contains four original-derived frontends, with fictional sample labels. It routes `?demo=christmas`, `?demo=thanksgiving`, `?demo=decker`, and `?demo=rafa` to their separate adapters. Each adapter uses only its assigned synthetic data source. No original baby Sheet ID is present in the deployable source. Public admin mutations are disabled. Visitor text entry is removed: names, notes, items, dates, times and amounts use fixed fictional dropdown options. Existing attendance buttons, age choices and dish checkboxes remain selection-only. Contact details are not collected. Server wrappers independently whitelist every persisted visitor field, validate rolling date options, and derive Rafa submission IDs from approved choices rather than accepting arbitrary metadata. Submissions are capped at 200 entries per demo, with validation and formula escaping. This cap is not a comprehensive anti-abuse/rate-limiting system.
 
 The original family Apps Script projects, deployment URLs, and Sheets were not modified. The isolated baby copies were sanitized across every copied tab before use. Christmas and Thanksgiving retain their existing fictional demo-only Sheets.
 
@@ -32,10 +32,20 @@ The original family Apps Script projects, deployment URLs, and Sheets were not m
 
 The local gallery fixture uses the real gallery frontend with a four-card pending-data model, not fake screenshots or fabricated demo links. A 1363px browser viewport rendered two columns; a nested 390px viewport rendered one column. Both had no horizontal overflow and four cards. These are browser viewport checks, not physical-phone or authenticated app tests. Viewport screenshots are in `docs/qa/`. Full-page screenshot capture timed out; no full-page capture is claimed.
 
+## Building the demo bundle
+
+Edit `demos/Adapters.js`, `demos/DropdownPolicy.js`, `demos/choices.json` and the four `.html` sources, then run `node scripts/build-demo-suite.cjs`. Install only the generated `demos/Code.gs` into the demo Apps Script project. The root gallery project must not import these files.
+
 ## Local validation
 
 `node test.cjs` — eight model/security scenarios and gallery frontend parsing.
 
-`node test-demos.cjs` — nine adapter/isolation/validation scenarios and parsing of all four frontend scripts.
+`node test-demos.cjs` — thirteen adapter/isolation/validation scenarios and parsing of all four frontend scripts.
 
 These tests use mocks. They do not establish live Google Sheets persistence, anonymous access, screenshots, mobile acceptance, or a deployed portfolio.
+
+## Dropdown-only update — November 1
+
+Source now removes every text input/textarea, including the unused honeypot, and all prompt-based admin editing. Local browser fixtures for all four original-derived pages each report zero text inputs/textareas/contenteditable fields; native fictional-name and gift-card dropdown selection was exercised. These fixtures stub RPC calls and do not write to Google Sheets. `docs/qa/dropdown-only-local-preview.jpg` shows this local fixture, not a deployed demo.
+
+The new dropdown bundle has not yet been verified installed in Apps Script; earlier installed-source readback evidence applies to the previous bundle only. Deployment remains blocked on the previously requested OAuth approval; this update does not constitute permission approval and no grant was retried.
